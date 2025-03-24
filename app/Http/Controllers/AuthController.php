@@ -50,10 +50,12 @@ class AuthController extends Controller
         ],[
             'fullname.required' => 'the full name field is required.',
             'email.email' => 'Please enter a valid email address.',
+            'email.unique' => 'this email is already used.',
             'email.required' => 'The email field is required.',
             'password.required' => 'The password field is required.',
             'password.min' => 'the password is below the length authorized.',
-            'phonenumber.required' => 'The phone field is required.'
+            'phonenumber.required' => 'The phone field is required.',
+            'phonenumber.max' => 'the phone length does not match',
         ]);
 
         $user = User::create([
