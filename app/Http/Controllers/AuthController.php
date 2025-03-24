@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User; // Use the User model
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -32,7 +32,11 @@ class AuthController extends Controller
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
-            return redirect()->route('homepage')->with('success', 'You are now logged in.');
+            $user = Auth::user();
+            if ($user->role === 'admin') {
+                return redirect()->route('dashboard');
+            }
+            return redirect()->route('homepage');
         }
 
         return back()->withErrors([
