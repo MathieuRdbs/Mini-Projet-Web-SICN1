@@ -23,27 +23,19 @@
                         </div>
                         <div class="input-group mb-3">
                             <input type="text" name="fullname" class="form-control form-control-lg bg-light fs-6 @error('fullname') is-invalid @enderror" placeholder="full Name" value="{{old('fullname')}}">
-                            @error('fullname')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            
                         </div>
                         <div class="input-group mb-3">
                             <input type="email" name="email" class="form-control form-control-lg bg-light fs-6 @error('email') is-invalid @enderror" placeholder="Email address" value="{{old('email')}}">
-                            @error('email')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            
                         </div>
                         <div class="input-group mb-3">
                             <input type="password" name="password" class="form-control form-control-lg bg-light fs-6 @error('password') is-invalid @enderror" placeholder="Password">
-                            @error('password')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            
                         </div>
                         <div class="input-group mb-3">
                             <input type="text" name="phonenumber" class="form-control form-control-lg bg-light fs-6 @error('email') is-invalid @enderror" placeholder="Phone number" value="{{old('phonenumber')}}">
-                            @error('phonenumber')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            
                         </div>
                         <div class="input-group mb-3">
                             <button class="btn btn-lg btn-primary w-100 fs-6" type="submit">Register</button>
@@ -56,4 +48,19 @@
             </div>
         </div>
     </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    @if ($errors->any())
+        <script>
+            @foreach ($errors->all() as $error)
+                toastr.error("{{ $error }}");
+            @endforeach
+        </script>
+    @endif
+
+    @if (session('success'))
+        <script>
+            toastr.success("{{ session('success') }}");
+        </script>
+    @endif
 @endsection     

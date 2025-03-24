@@ -4,13 +4,18 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Middleware\adminMiddleware;
+use App\Http\Controllers\CategoryController;
 
 Route::get('/', [homeController::class, 'showhome'])->name('homepage');
 
-Route::get('/admindash', [AdminController::class, 'showdashboard'])->name('dashboard');
-Route::get('/categories', [AdminController::class, 'categories'])->name('categories');
-Route::post('/categories', [AdminController::class, 'addCategory'])->name('categoriespost');
-Route::get('/categories/delete/{id}', [AdminController::class, 'deleteCategory'])->name('categorydelete');
+Route::middleware(['auth', AdminMiddleware::class])->group(function(){
+    Route::get('/admindash', [AdminController::class, 'showdashboard'])->name('dashboard');
+    Route::get('/categories', [CategoryController::class, 'categories'])->name('categories');
+    Route::post('/categories', [CategoryController::class, 'addCategory'])->name('categoriespost');
+    Route::get('/categories/delete/{id}', [CategoryController::class, 'deleteCategory'])->name('categorydelete'); 
+    Route::put('/categories/{id}', [CategoryController::class, 'updateCategory'])->name('category.update'); 
+});
 
 Route::middleware('guest')->group(function(){
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
