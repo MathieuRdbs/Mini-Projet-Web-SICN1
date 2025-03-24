@@ -5,25 +5,16 @@
 @endsection
 
 @section('main')
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
     <form action="{{route('registerpost')}}" method="post">
         @csrf
         <div class="container d-flex justify-content-center align-items-center min-vh-100">
             <div class="row border rounded-5 p-3 bg-white shadow box-area">
 
                 <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box p-0" style="background: white; height: 100%;">
-                    <div class="featured-image w-100 h-100 d-flex justify-content-center align-items-center" style="overflow: hidden;">
+                    <div class="featured-image rounded-4 w-100 h-100 d-flex justify-content-center align-items-center" style="overflow: hidden;">
                         <img src="{{ asset('img/logo.jpg') }}" class="img-fluid h-100 w-100" style="object-fit: cover;">
                     </div>
-                </div>  
+                </div>
     
                 <div class="col-md-6 right-box">
                     <div class="row align-items-center">
