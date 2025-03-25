@@ -25,7 +25,7 @@ final class CategoryController
     }
     public function updateCategory(Request $request, $id){
         $request->validate([
-            'category_name' => 'required|string|max:255|unique:categories,category_name,'.$id
+            'category_name' => 'required|string|max:255|unique:categories,category_name'
         ]);
     
         $category = Category::findOrFail($id);
