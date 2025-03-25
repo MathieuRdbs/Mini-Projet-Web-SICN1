@@ -6,15 +6,23 @@ use App\Http\Controllers\homeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Middleware\adminMiddleware;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 
 Route::get('/', [homeController::class, 'showhome'])->name('homepage');
 
 Route::middleware(['auth', AdminMiddleware::class])->group(function(){
+    //users
     Route::get('/admindash', [AdminController::class, 'showdashboard'])->name('users');
+    //categories
     Route::get('/categories', [CategoryController::class, 'categories'])->name('categories');
     Route::post('/categories', [CategoryController::class, 'addCategory'])->name('categoriespost');
     Route::get('/categories/delete/{id}', [CategoryController::class, 'deleteCategory'])->name('categorydelete'); 
     Route::put('/categories/{id}', [CategoryController::class, 'updateCategory'])->name('categoryupdate'); 
+    //products
+    Route::get('/products',[ProductController::class, 'products'])->name('products');
+    Route::post('/products', [ProductController::class, 'addProduct'])->name('productspost');
+    Route::get('/products/delete/{id}', [ProductController::class, 'deleteProduct'])->name('productdelete'); 
+    Route::put('/products/{id}', [ProductController::class, 'updateProduct'])->name('productupdate');
 });
 
 Route::middleware('guest')->group(function(){

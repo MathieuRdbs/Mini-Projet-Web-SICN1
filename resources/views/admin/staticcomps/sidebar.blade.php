@@ -15,7 +15,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('products')}}" class="nav-link @if(request()->routeIs('products')) active @endif">
                     <i class="fas fa-box"></i> <span>Products</span>
                 </a>
             </li>

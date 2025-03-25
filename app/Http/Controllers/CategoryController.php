@@ -11,7 +11,7 @@ final class CategoryController
     }
     public function addCategory(Request $request){
         $input = $request->validate([
-            'category_name' => 'required|unique:categories,category_name'
+            'category_name' => 'required|string|unique:categories,category_name'
         ],[
             'category_name.required' => 'the field is empty',
             'category_name.unique' =>  'this category already exist'
@@ -25,7 +25,7 @@ final class CategoryController
     }
     public function updateCategory(Request $request, $id){
         $request->validate([
-            'category_name' => 'required|string|max:255|unique:categories,category_name'
+            'category_name' => 'required|string|unique:categories,category_name'
         ]);
     
         $category = Category::findOrFail($id);
