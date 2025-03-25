@@ -23,31 +23,17 @@ final class CategoryController
 
         return redirect()->route('categories')->with('success', 'the category is added succefully');
     }
-    public function updateCategory(Request $request, $id)
-    {
+    public function updateCategory(Request $request, $id){
         $request->validate([
             'category_name' => 'required|string|max:255|unique:categories,category_name,'.$id
         ]);
-
-        try {
-            $category = Category::findOrFail($id);
-            $category->update([
-                'category_name' => $request->category_name
-            ]);
-            if ($request->ajax()) {
-                return response()->json([
-                    'success' => 'Category updated successfully!'
-                ]);
-            }
-            return redirect()->back()->with('success', 'Category updated successfully!');
-        } catch (\Exception $e) {
-            if ($request->ajax()) {
-                return response()->json([
-                    'error' => 'Error updating category: '
-                ], 500);
-            }
-            return redirect()->back()->with('error', 'Error updating category!');
-        }
+    
+        $category = Category::findOrFail($id);
+        $category->update([
+            'category_name' => $request->category_name
+        ]);
+        
+        return redirect()->back()->with('success', 'Category updated successfully!');
     }
     public function deleteCategory($id){
         $category = Category::find($id);

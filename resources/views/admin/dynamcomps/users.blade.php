@@ -1,8 +1,8 @@
 @extends('layouts.admindash')
 @section('title')
-    Dashboard
+    Users
 @endsection
 
 @section('main')
-    Dashboard
+    Users
 @endsection

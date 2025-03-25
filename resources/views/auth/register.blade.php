@@ -48,19 +48,4 @@
             </div>
         </div>
     </form>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    @if ($errors->any())
-        <script>
-            @foreach ($errors->all() as $error)
-                toastr.error("{{ $error }}");
-            @endforeach
-        </script>
-    @endif
-
-    @if (session('success'))
-        <script>
-            toastr.success("{{ session('success') }}");
-        </script>
-    @endif
 @endsection     

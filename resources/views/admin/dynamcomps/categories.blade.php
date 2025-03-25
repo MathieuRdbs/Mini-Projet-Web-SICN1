@@ -29,10 +29,13 @@
                                 @csrf
                                 <button class="btn btn-success modify-btn" 
                                         data-id="{{ $category->id }}"
-                                        data-name="{{ $category->category_name }}">
+                                        data-label="{{ $category->category_name }}">
                                     Modify
                                 </button>
-                                <a href="{{route('categorydelete',$category->id)}}" class="text-center btn btn-danger" onclick="confirmation(event)">Delete</a>                          
+                                <a href="{{route('categorydelete',$category->id)}}" 
+                                    class="text-center btn btn-danger" onclick="confirmation(event, 'This category will be deleted permanently!')">
+                                    Delete
+                                </a>                          
                             </td>
                         </tr>
                     @endforeach
@@ -51,7 +54,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Modify Category</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="modifyForm" method="POST">
                     @csrf
@@ -60,8 +63,8 @@
                         <input type="text" name="category_name" id="categoryNameInput" class="form-control">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" id="cancelBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" id="modifyForm" class="btn btn-primary">Save changes</button>
                     </div>
                 </form>
             </div>
@@ -72,69 +75,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        // Modify button click handler
-        $(document).ready(function() {
-            $('.modify-btn').click(function() {
-                const id = $(this).data('id');
-                const name = $(this).data('name');
-                $('#modifyForm').attr('action', `/categories/${id}`);
-                $('#categoryNameInput').val(name);
-                $('#modifyModal').modal('show');
-            });
-            $('#modifyForm').submit(function(e) {
-                e.preventDefault();
-                $.ajax({
-                    url: $(this).attr('action'),
-                    method: 'POST',
-                    data: $(this).serialize(),
-                    success: function(response) {
-                        $('#modifyModal').modal('hide');
-                        toastr.success(response.success);
-                        setTimeout(() => location.reload(), 1000);
-                    },
-                    error: function(xhr) {
-                        toastr.error(xhr.responseJSON.message);
-                    }
-                });
-            });
-        });
-        function confirmation(event){
-            event.preventDefault();
-            var url = event.currentTarget.getAttribute('href');
-            Swal.fire({
-                title: 'Are you sure?',
-                text: 'This category will be deleted permanently!',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33', 
-                cancelButtonColor: '#3085d6', 
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'Cancel'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = url;
-                }
-            });
-        }
-        toastr.options = {
-            "closeButton": true,
-            "progressBar": true,
-            "positionClass": "toast-top-right",
-            "timeOut": "5000",
-        };
-    </script>
-    @if ($errors->any())
-        <script>
-            @foreach ($errors->all() as $error)
-                toastr.error("{{ $error }}");
-            @endforeach
-        </script>
-    @endif
-
-    @if (session('success'))
-        <script>
-            toastr.success("{{ session('success') }}");
-        </script>
-    @endif
+    <script src="{{asset('js/confirmationmsg.js')}}"></script>
+    <script src="{{asset('js/categoriesmodify.js')}}"></script>
 @endsection

@@ -10,11 +10,11 @@ use App\Http\Controllers\CategoryController;
 Route::get('/', [homeController::class, 'showhome'])->name('homepage');
 
 Route::middleware(['auth', AdminMiddleware::class])->group(function(){
-    Route::get('/admindash', [AdminController::class, 'showdashboard'])->name('dashboard');
+    Route::get('/admindash', [AdminController::class, 'showdashboard'])->name('users');
     Route::get('/categories', [CategoryController::class, 'categories'])->name('categories');
     Route::post('/categories', [CategoryController::class, 'addCategory'])->name('categoriespost');
     Route::get('/categories/delete/{id}', [CategoryController::class, 'deleteCategory'])->name('categorydelete'); 
-    Route::put('/categories/{id}', [CategoryController::class, 'updateCategory'])->name('category.update'); 
+    Route::put('/categories/{id}', [CategoryController::class, 'updateCategory'])->name('categoryupdate'); 
 });
 
 Route::middleware('guest')->group(function(){

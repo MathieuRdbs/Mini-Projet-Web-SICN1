@@ -5,8 +5,8 @@
     <div class="d-flex flex-column h-100">
         <ul class="nav flex-column mt-4">
             <li class="nav-item">
-                <a href="{{route('dashboard')}}" class="nav-link @if(request()->routeIs('dashboard')) active @endif">
-                    <i class="fas fa-home"></i> <span>Dashboard</span>
+                <a href="{{route('users')}}" class="nav-link @if(request()->routeIs('users')) active @endif">
+                    <i class="fas fa-users"></i> <span>Users</span>
                 </a>
             </li>
             <li class="nav-item">
