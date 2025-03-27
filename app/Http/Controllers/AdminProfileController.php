@@ -5,8 +5,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 
-use function PHPUnit\Framework\isEmpty;
-
 class AdminProfileController extends Controller{
     public function showProfile(){
         $admin = Auth::user();
@@ -35,7 +33,16 @@ class AdminProfileController extends Controller{
             'phonenumber.required' => 'The phone field is required.',
             'phonenumber.max' => 'the phone length does not match',
         ]);
-        $admin->update($validated);
+        if ($request->password === null) {
+            $admin->update([
+                'fullname' => $request->fullname,
+                'email' => $request->email,
+                'phonenumber' => $request->phonenumber
+            ]);
+        }else{
+            $admin->update($validated);
+        }
+        
         return redirect()->back()->with('success', 'Profile updated successfully!');
     }
 }
