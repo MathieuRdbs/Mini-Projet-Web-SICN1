@@ -4,6 +4,10 @@
 /public/hot
 /public/storage
 /storage/*.key
+<<<<<<< HEAD
+=======
+.env
+>>>>>>> 6021da83e4719ad92d4deaa41cc173b00716b30b
 .env.backup
 .env.production
 .phpactor.json
@@ -18,3 +22,7 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6021da83e4719ad92d4deaa41cc173b00716b30b
