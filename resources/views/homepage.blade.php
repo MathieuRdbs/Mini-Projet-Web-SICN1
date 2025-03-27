@@ -7,13 +7,18 @@
     <title>Document</title>
 </head>
 <body>
+        
     @auth
-        <form action="{{route('logout')}}" method="post">
-            @csrf
-            <div>
-                <button type="submit">logout</button>
-            </div>
-        </form>
+    <form action="{{route('logout')}}" method="post">
+        @csrf
+        <div>
+            <button type="submit">logout</button>
+        </div>
+    </form>
+    @else
+        
+        <a href="{{route('login')}}">login</a>
+    <a href="{{route('register')}}">Register</a>
     @endauth
 </body>
 </html>
