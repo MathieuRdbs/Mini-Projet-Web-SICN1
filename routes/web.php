@@ -3,7 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\homeController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\adminMiddleware;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
@@ -11,8 +11,11 @@ use App\Http\Controllers\ProductController;
 Route::get('/', [homeController::class, 'showhome'])->name('homepage');
 
 Route::middleware(['auth', AdminMiddleware::class])->group(function(){
+    //admin profile
+    
     //users
-    Route::get('/admindash', [AdminController::class, 'showdashboard'])->name('users');
+    Route::get('/users', [UserController::class, 'showUsers'])->name('users');
+    Route::get('/users/delete/{id}', [UserController::class, 'deleteUser'])->name('userdelete'); 
     //categories
     Route::get('/categories', [CategoryController::class, 'categories'])->name('categories');
     Route::post('/categories', [CategoryController::class, 'addCategory'])->name('categoriespost');

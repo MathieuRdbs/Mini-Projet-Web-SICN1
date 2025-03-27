@@ -44,8 +44,8 @@ class ProductController extends Controller{
         $oldImage = $product->image;
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->move('productimages');
-            if ($oldImage && file_exists(public_path('productimages/'.$oldImage))) {
-                unlink(public_path('productimages/'.$oldImage));
+            if ($oldImage && file_exists($product->image)) {
+                unlink($product->image);
             }
         } else {
             $validated['image'] = $product->image;
@@ -56,10 +56,10 @@ class ProductController extends Controller{
 
     public function deleteProduct($id){
         $product = Product::find($id);
-        if ($product->image && file_exists(public_path('productimages/'.$product->image))) {
-            unlink(public_path('productimages/'.$product->image));
+        if ($product->image && file_exists($product->image)) {
+            unlink($product->image);
         }
         $product->delete();
-        return redirect()->back()->with('success', 'Product deleted successfully');;
+        return redirect()->back()->with('success', 'Product deleted successfully');
     }
 }
