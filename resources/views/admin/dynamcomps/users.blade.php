@@ -14,6 +14,7 @@
                     <th scope="col" class="table-active text-center">Username</th>
                     <th scope="col" class="table-active text-center">email</th>
                     <th scope="col" class="table-active text-center">Phone number</th>
+                    <th scope="col" class="table-active text-center">created at</th>
                     <th scope="col" class="table-active text-center">Action</th>
                 </tr>
                 @if($users->isNotEmpty())
@@ -22,6 +23,7 @@
                             <td scope="row" class="text-center">{{$user->fullname}}</td>
                             <td scope="row" class="text-center">{{$user->email}}</td>
                             <td scope="row" class="text-center">{{$user->phonenumber}}</td>
+                            <td scope="row" class="text-center">{{$user->created_at->format('M d, Y')}}</td>
                             <td scope="row" class="text-center">
                                 <a href="{{route('userdelete', $user->id)}}" 
                                     class="text-center btn btn-danger" onclick="confirmation(event, 'The user {{$user->fullname}} will be deleted permanently!')">
@@ -32,7 +34,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td colspan="4" scope="row" class="text-center">there is no users.</td>
+                        <td colspan="5" scope="row" class="text-center">there is no users.</td>
                     </tr>
                 @endif
             </table>

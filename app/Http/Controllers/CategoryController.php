@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
-final class CategoryController
+class CategoryController extends Controller
 {
     public function categories(){
         $categories = Category::all();

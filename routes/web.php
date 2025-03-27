@@ -7,12 +7,14 @@ use App\Http\Controllers\UserController;
 use App\Http\Middleware\adminMiddleware;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AdminProfileController;
 
 Route::get('/', [homeController::class, 'showhome'])->name('homepage');
 
 Route::middleware(['auth', AdminMiddleware::class])->group(function(){
     //admin profile
-    
+    Route::get('/adminprofile', [AdminProfileController::class, 'showProfile'])->name('adminprofile');
+    Route::put('/adminprofile/{id}', [AdminProfileController::class, 'updateProfile'])->name('updateprofile');
     //users
     Route::get('/users', [UserController::class, 'showUsers'])->name('users');
     Route::get('/users/delete/{id}', [UserController::class, 'deleteUser'])->name('userdelete'); 
