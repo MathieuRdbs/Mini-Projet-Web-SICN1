@@ -33,6 +33,10 @@
                         <div class="row">
                             <small>Don't have an account? <a href="{{ route('register') }}">Sign Up</a></small>
                         </div>
+
+                        <div class="row">
+                            <small>Return to <a href="{{ route('homepage') }}">Home Page</a></small>
+                        </div>
                      </div>
                 </div> 
             </div>
