@@ -129,7 +129,7 @@ body {
 }
 
 .nav-link {
-    transition: color 0.3s ease, transform 0.2s ease;
+    transition: color 0.4s ease, transform 0.2s ease;
 }
 
 .nav-link:hover {
@@ -148,7 +148,7 @@ body {
     width: 0;
     height: 2px;
     background-color: #d7f01c; /* Couleur de la barre */
-    transition: width 0.3s ease-in-out;
+    transition: width 0.4s ease-in-out;
 }
 
 .nav-link:hover::after {
@@ -158,7 +158,7 @@ body {
 .nav-link {
     padding: 8px 15px;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.4s ease;
 }
 
 .nav-link:hover {
