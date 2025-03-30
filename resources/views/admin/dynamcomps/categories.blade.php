@@ -46,9 +46,12 @@
                 @endif
             </table>
         </div>
+
+        <div class="m-4">
+            {{$categories->links()}}
+        </div>
     </div>
 
-    <!-- Modal for Modification -->
     <div class="modal fade" id="modifyModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

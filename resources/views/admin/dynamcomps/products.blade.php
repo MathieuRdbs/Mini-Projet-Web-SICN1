@@ -64,6 +64,9 @@
                 @endif
             </table>
         </div>
+        <div class="m-3">
+            {{$products->links()}}
+        </div>
     </div>
 
     <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">

@@ -39,5 +39,8 @@
                 @endif
             </table>
         </div>
+        <div class="m-3">
+            {{$users->links()}}
+        </div>
     </div>
 @endsection
