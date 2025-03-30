@@ -38,6 +38,7 @@
         @include('home.navbar_no_conn')
 
         <h1>WELCOME TO OUR HOMEPAGE</h1>
+        <p>Login or register</p>
 
       <!--   <a href="{{route('login')}}">login</a>
     <a href="{{route('register')}}">Register</a> -->
