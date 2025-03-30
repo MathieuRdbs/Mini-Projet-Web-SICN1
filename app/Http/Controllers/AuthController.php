@@ -36,7 +36,7 @@ class AuthController extends Controller
             if ($user->role === 'admin') {
                 return redirect()->route('users');
             }
-            return redirect()->route('homepage');
+            return redirect()->route('homepage')->with('success', 'You have been logged in.');
         }
 
         return back()->withErrors([
@@ -79,6 +79,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         
-        return redirect()->route('login')->with('success', 'You have been logged out successfully.');
+        return redirect()->back()->with('success', 'You have been logged out successfully.');
     }
 }

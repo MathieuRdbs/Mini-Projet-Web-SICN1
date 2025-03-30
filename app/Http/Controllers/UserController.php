@@ -5,7 +5,7 @@ use App\Models\User;
 
 class UserController extends Controller{
     public function showUsers(){
-        $users = User::where('role', 'user')->get();
+        $users = User::where('role', 'user')->paginate(5);
         return view('admin.dynamcomps.users', compact('users'));
     }
 

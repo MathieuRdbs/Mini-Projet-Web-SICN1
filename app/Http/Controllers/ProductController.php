@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller{
     public function products(){
         $categories = Category::all();
-        $products = Product::all();
+        $products = Product::paginate(4);
         return view('admin.dynamcomps.products', compact(['products', 'categories']));
     }
 
@@ -20,7 +20,7 @@ class ProductController extends Controller{
             'price' => 'required|numeric|min:0',
             'quantity' => 'required|integer|min:0',
             'category_id' => 'required|exists:categories,id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'required|image|max:2048'
         ]);
     
         if ($request->hasFile('image')) {
@@ -38,7 +38,7 @@ class ProductController extends Controller{
             'price' => 'required|numeric|min:0',
             'quantity' => 'required|integer|min:0',
             'category_id' => 'required|exists:categories,id',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'nullable|image|max:2048'
         ]);
         $product = Product::findOrFail($id);
         $oldImage = $product->image;

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     public function categories(){
-        $categories = Category::all();
+        $categories = Category::paginate(4);
         return view('admin.dynamcomps.categories', compact('categories'));
     }
     public function addCategory(Request $request){
