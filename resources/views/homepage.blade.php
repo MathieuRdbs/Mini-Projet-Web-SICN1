@@ -12,11 +12,11 @@
 </head>
 <body>
        
-
+    @include('home.navbar_conn')
     @auth
     <!-- Ce qui s'affiche lorsque l'utilisateur est connecté -->
     <div>
-        @include('home.navbar_yes_conn')
+        {{-- include('home.navbar_yes_conn') --}}
         <h2>Bienvenue, {{$user->fullname}} !</h2>
             <p>Voici vos informations :</p>
             <ul>
@@ -33,31 +33,42 @@
         </div>
     </form>
 
+    @include('home.home_page_presentation')
+
 
     @else
-        @include('home.navbar_no_conn')
-
+        
+<!-- 
         <h1>WELCOME TO OUR HOMEPAGE</h1>
-        <p>Login or register</p>
+        <p>Login or register</p> -->
 
-      <!--   <a href="{{route('login')}}">login</a>
-    <a href="{{route('register')}}">Register</a> -->
+        @include('home.home_page_presentation')
+
+      {{-- <!--   <a href="{{route('login')}}">login</a>
+    <a href="{{route('register')}}">Register</a> --> --}}
     @endauth
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        let navbarHeight = document.querySelector("header").offsetHeight;
+        document.body.style.paddingTop = (navbarHeight) + "px";
+        });
+    </script>
 </body>
 </html>
 
 <!--
 Salam
-@auth
+{{-- @auth
     {{$user->id}}
     {{$user->fullname}}
     {{$user->email}}
     {{$user->phonenumber}}
     {{$user->password}}
     {{$user->role}}
-@endauth
+@endauth --}}
 
 -->
