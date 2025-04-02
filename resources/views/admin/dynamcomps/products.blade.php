@@ -34,7 +34,7 @@
                                 @endif
                             </td>
                             <td scope="row" class="text-center">{{ $product->name }}</td>
-                            <td scope="row" class="text-center">{{ Str::limit($product->description, 50) }}</td>
+                            <td scope="row" class="text-center">{{ Str::limit($product->description, 50, '...') }}</td>
                             <td scope="row" class="text-center">{{ $product->category->category_name}}</td>
                             <td scope="row" class="text-center">{{ $product->price }}</td>
                             <td scope="row" class="text-center">{{ $product->quantity }}</td>

@@ -20,7 +20,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('orders')}}" class="nav-link @if(request()->routeIs('orders')) active @endif">
                     <i class="fas fa-shopping-cart"></i> <span>Orders</span>
                 </a>
             </li>

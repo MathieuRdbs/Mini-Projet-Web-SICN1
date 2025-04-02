@@ -8,6 +8,7 @@ use App\Http\Middleware\adminMiddleware;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminProfileController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', [homeController::class, 'showhome'])->name('homepage');
 
@@ -28,6 +29,10 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function(){
     Route::post('/products', [ProductController::class, 'addProduct'])->name('productspost');
     Route::get('/products/delete/{id}', [ProductController::class, 'deleteProduct'])->name('productdelete'); 
     Route::put('/products/{id}', [ProductController::class, 'updateProduct'])->name('productupdate');
+    //orders
+    Route::get('/orders', [OrderController::class, 'showOrdersAdmin'])->name('orders');
+    Route::get('/orders/ship/{id}', [OrderController::class, 'shipOrder'])->name('ordership');
+    Route::get('/orders/cancel/{id}', [OrderController::class, 'cancelOrder'])->name('ordercancel');
 });
 
 Route::middleware('guest')->group(function(){

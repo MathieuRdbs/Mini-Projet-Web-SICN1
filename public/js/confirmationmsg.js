@@ -9,7 +9,7 @@ function confirmation(event, msg){
         showCancelButton: true,
         confirmButtonColor: '#d33', 
         cancelButtonColor: '#3085d6', 
-        confirmButtonText: 'Yes, delete it!',
+        confirmButtonText: 'Yes',
         cancelButtonText: 'Cancel'
     }).then((result) => {
         if (result.isConfirmed) {
