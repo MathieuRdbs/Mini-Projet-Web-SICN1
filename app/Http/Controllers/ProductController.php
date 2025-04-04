@@ -7,7 +7,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller{
-    public function products(){
+    public function productsAdmin(){
         $categories = Category::all();
         $products = Product::paginate(4);
         return view('admin.dynamcomps.products', compact(['products', 'categories']));

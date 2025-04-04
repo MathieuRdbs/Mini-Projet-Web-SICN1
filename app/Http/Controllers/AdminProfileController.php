@@ -5,13 +5,13 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 
-class AdminProfileController extends Controller{
-    public function showProfile(){
+class ProfileController extends Controller{
+    public function showProfileAdmin(){
         $admin = Auth::user();
         return view('admin.dynamcomps.profile', compact('admin'));
     }
 
-    public function updateProfile(Request $request, $id){
+    public function updateProfileAdmin(Request $request, $id){
         $admin = User::find($id);
         $validated = $request->validate([
             'fullname' => 'required|string|max:255',
