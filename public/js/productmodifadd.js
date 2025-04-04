@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
             resetForm();
             
             modalTitle.textContent = 'Add New Product';
-            productForm.setAttribute('action', '/products');
+            productForm.setAttribute('action', '/productsAdmin');
             formMethod.value = 'POST';
             
             bsModal.show();
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
             modalTitle.textContent = 'Edit Product';
             const productId = this.dataset.id;
             
-            productForm.setAttribute('action', `/products/${productId}`); 
+            productForm.setAttribute('action', `/productsAdmin/${productId}`); 
             formMethod.value = 'PUT';
             productIdInput.value = productId;
             
