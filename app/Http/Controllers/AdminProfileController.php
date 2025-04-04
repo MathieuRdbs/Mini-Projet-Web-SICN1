@@ -11,8 +11,8 @@ class ProfileController extends Controller{
         return view('admin.dynamcomps.profile', compact('admin'));
     }
 
-    public function updateProfileAdmin(Request $request, $id){
-        $admin = User::find($id);
+    public function updateProfile(Request $request, $id){
+        $user = User::find($id);
         $validated = $request->validate([
             'fullname' => 'required|string|max:255',
             'email' => [
@@ -20,7 +20,7 @@ class ProfileController extends Controller{
                 'string',
                 'email',
                 'max:255',
-                Rule::unique('users')->ignore($admin->id),
+                Rule::unique('users')->ignore($user->id),
             ],
             'password' => 'nullable|string|min:8',
             'phonenumber' => 'required|string|max:20',
@@ -34,13 +34,13 @@ class ProfileController extends Controller{
             'phonenumber.max' => 'the phone length does not match',
         ]);
         if ($request->password === null) {
-            $admin->update([
+            $user->update([
                 'fullname' => $request->fullname,
                 'email' => $request->email,
                 'phonenumber' => $request->phonenumber
             ]);
         }else{
-            $admin->update($validated);
+            $user->update($validated);
         }
         
         return redirect()->back()->with('success', 'Profile updated successfully!');

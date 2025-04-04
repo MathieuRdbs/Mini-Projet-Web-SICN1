@@ -15,7 +15,7 @@ Route::get('/', [homeController::class, 'showhome'])->name('homepage');
 Route::middleware(['auth', AdminMiddleware::class])->group(function(){
     //admin profile
     Route::get('/adminprofile', [ProfileController::class, 'showProfileAdmin'])->name('adminprofile');
-    Route::put('/adminprofile/{id}', [ProfileController::class, 'updateProfileAdmin'])->name('updateprofile');
+    Route::put('/adminprofile/{id}', [ProfileController::class, 'updateProfile'])->name('updateprofile');
     //users
     Route::get('/users', [UserController::class, 'showUsers'])->name('users');
     Route::get('/users/delete/{id}', [UserController::class, 'deleteUser'])->name('userdelete'); 
