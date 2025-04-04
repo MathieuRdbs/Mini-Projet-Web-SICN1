@@ -1,5 +1,10 @@
 /* STYLE OF THE NAVBAR */
-
+body {
+    background-image: url('/img/homepage/bg_img.jpg');
+    background-size: cover; /* Pour que l'image couvre tout l'écran */
+    background-position: center; /* Centrer l'image */
+    background-attachment: fixed; /* Optionnel: pour que l'image ne se déplace pas lors du scroll */
+}
 
 
 .p-3 {
@@ -174,7 +179,11 @@ body {
     color: #d7f01c !important;
     border-bottom: 3px solid #d7f01c;
 }
+.nav-link.dropdown-toggle::after {
+    display: none !important;
+}
 
+/*placeholder of the search bar*/
 ::placeholder {
     color: rgba(255, 255, 255, 0.7) !important; /* Blanc semi-transparent */
 }
@@ -374,4 +383,29 @@ body {
     /* background-color: #212529; */
     background-color: #d3d3d3;
 }
+
+
+/*STYLE OF THE HOMEPAGE PART 2*/
+.card-img {
+    width: 100%; /* Garde la même largeur */
+    height: 300px; /* Ajuste la hauteur */
+    object-fit: cover; /* Coupe l’image pour remplir la hauteur sans déformation */
+}
+
+.card {
+    opacity: 0;
+    transform: translateX(200px); /* Card en bas au départ */
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+    
+}
+
+.card.visible {
+    opacity: 1;
+    transform: translateX(0); /* Card glisse en haut */
+}
+
+
+
+
+
   
