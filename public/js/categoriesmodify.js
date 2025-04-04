@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const id = this.dataset.id;
             const name = this.dataset.label;
             
-            modifyForm.action = `/categories/${id}`;
+            modifyForm.action = `/categoriesAdmin/${id}`;
             
             categoryNameInput.value = name;
             
