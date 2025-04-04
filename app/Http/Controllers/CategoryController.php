@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function categories(){
+    public function categoriesAdmin(){
         $categories = Category::paginate(4);
         return view('admin.dynamcomps.categories', compact('categories'));
     }

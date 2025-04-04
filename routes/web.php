@@ -7,35 +7,36 @@ use App\Http\Controllers\UserController;
 use App\Http\Middleware\adminMiddleware;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\AdminProfileController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserProfileController;
 
 Route::get('/', [homeController::class, 'showhome'])->name('homepage');
+Route::get('/product', [homeController::class, 'showProducts'])->name('products');
 
 Route::get('/', [homeController::class, 'index'])->name('homepage');
 
 Route::middleware(['auth', AdminMiddleware::class])->group(function(){
     //admin profile
-    Route::get('/adminprofile', [AdminProfileController::class, 'showProfile'])->name('adminprofile');
-    Route::put('/adminprofile/{id}', [AdminProfileController::class, 'updateProfile'])->name('updateprofile');
+    Route::get('/adminprofile', [ProfileController::class, 'showProfileAdmin'])->name('adminprofile');
+    Route::put('/adminprofile/{id}', [ProfileController::class, 'updateProfile'])->name('updateprofile');
     //users
     Route::get('/users', [UserController::class, 'showUsers'])->name('users');
     Route::get('/users/delete/{id}', [UserController::class, 'deleteUser'])->name('userdelete'); 
     //categories
-    Route::get('/categories', [CategoryController::class, 'categories'])->name('categories');
-    Route::post('/categories', [CategoryController::class, 'addCategory'])->name('categoriespost');
-    Route::get('/categories/delete/{id}', [CategoryController::class, 'deleteCategory'])->name('categorydelete'); 
-    Route::put('/categories/{id}', [CategoryController::class, 'updateCategory'])->name('categoryupdate'); 
+    Route::get('/categoriesAdmin', [CategoryController::class, 'categoriesAdmin'])->name('categories');
+    Route::post('/categoriesAdmin', [CategoryController::class, 'addCategory'])->name('categoriespost');
+    Route::get('/categoriesAdmin/delete/{id}', [CategoryController::class, 'deleteCategory'])->name('categorydelete'); 
+    Route::put('/categoriesAdmin/{id}', [CategoryController::class, 'updateCategory'])->name('categoryupdate'); 
     //products
-    Route::get('/products',[ProductController::class, 'products'])->name('products');
-    Route::post('/products', [ProductController::class, 'addProduct'])->name('productspost');
-    Route::get('/products/delete/{id}', [ProductController::class, 'deleteProduct'])->name('productdelete'); 
-    Route::put('/products/{id}', [ProductController::class, 'updateProduct'])->name('productupdate');
+    Route::get('/productsAdmin',[ProductController::class, 'productsAdmin'])->name('products');
+    Route::post('/productsAdmin', [ProductController::class, 'addProduct'])->name('productspost');
+    Route::get('/productsAdmin/delete/{id}', [ProductController::class, 'deleteProduct'])->name('productdelete'); 
+    Route::put('/productsAdmin/{id}', [ProductController::class, 'updateProduct'])->name('productupdate');
     //orders
-    Route::get('/orders', [OrderController::class, 'showOrdersAdmin'])->name('orders');
-    Route::get('/orders/ship/{id}', [OrderController::class, 'shipOrder'])->name('ordership');
-    Route::get('/orders/cancel/{id}', [OrderController::class, 'cancelOrder'])->name('ordercancel');
+    Route::get('/ordersAdmin', [OrderController::class, 'showOrdersAdmin'])->name('orders');
+    Route::get('/ordersAdmin/ship/{id}', [OrderController::class, 'shipOrder'])->name('ordership');
+    Route::get('/ordersAdmin/cancel/{id}', [OrderController::class, 'cancelOrder'])->name('ordercancel');
 });
 
 Route::middleware('guest')->group(function(){
