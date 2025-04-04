@@ -9,8 +9,11 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UserProfileController;
 
 Route::get('/', [homeController::class, 'showhome'])->name('homepage');
+
+Route::get('/', [homeController::class, 'index'])->name('homepage');
 
 Route::middleware(['auth', AdminMiddleware::class])->group(function(){
     //admin profile
@@ -45,5 +48,11 @@ Route::middleware('guest')->group(function(){
 Route::middleware('auth')->group(function(){
     Route::post('/logout',[AuthController::class, 'logout'])->name('logout');
     Route::get('/logout',[AuthController::class, 'logout'])->name('logout');
+});
+
+//pour la modification du profile de l'utilisateur
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [UserProfileController::class, 'showUser'])->name('user.profile');
+    Route::put('/profile', [UserProfileController::class, 'updateUser'])->name('user.update');
 });
 
