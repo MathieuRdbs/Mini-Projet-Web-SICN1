@@ -27,7 +27,7 @@
         <div class="col-md-6 d-flex flex-column justify-content-center">
             <h2 class="mb-3">{{ $product->name }}</h2>
             <p class="mb-3">{{ $product->description }}</p>
-            <p class="mb-4"><strong>Prix :</strong> €{{ number_format($product->price, 2) }}</p>
+            <p class="mb-4"><strong>Prix :</strong> {{ number_format($product->price, 2) }} DHS</p>
             
             <form action="{{route('cart.add')}}" method="POST">
             @csrf

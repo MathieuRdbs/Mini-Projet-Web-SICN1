@@ -77,7 +77,7 @@
                                     @auth
                                     <a href="{{ route('product.showDetails', $product->id) }}" class="btn btn-warning">Voir plus</a>
                                     @else
-                                    <a href="{{ route('login') }}" class="btn btn-warning">Voir plus</a>
+                                    <a href="{{ route('login') }}" class="btn btn-warning">See More</a>
                                     @endauth
                                     
                                 </div>
