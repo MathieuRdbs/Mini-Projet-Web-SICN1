@@ -17,9 +17,10 @@ class Cart extends Model
         't_price'
     ];
 
-    public function Order() {
-        return $this->belongsTo(Order::class);
+    public function order() {
+        return $this->belongsTo(Order::class, 'order_id');
     }
+    
 
     public function Product() {
         return $this->belongsTo(Product::class);
