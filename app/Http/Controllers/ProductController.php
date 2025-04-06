@@ -6,6 +6,8 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
+use App\Models\Cart;
+
 class ProductController extends Controller{
     public function productsAdmin(){
         $categories = Category::all();
@@ -61,5 +63,15 @@ class ProductController extends Controller{
         }
         $product->delete();
         return redirect()->back()->with('success', 'Product deleted successfully');
+    }
+
+    public function showProductDetails($id)
+    {
+    $categories = Category::all();
+    $product = Product::findOrFail($id);
+
+    $cartItems = Cart::all();
+    $cartItemCount = $cartItems->count();
+    return view('products.productDetail', compact('product','categories','cartItemCount'));
     }
 }

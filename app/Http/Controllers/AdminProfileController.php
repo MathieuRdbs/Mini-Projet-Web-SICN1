@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 
-class ProfileController extends Controller{
+class AdminProfileController extends Controller{
     public function showProfileAdmin(){
         $admin = Auth::user();
         return view('admin.dynamcomps.profile', compact('admin'));
