@@ -7,9 +7,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Middleware\adminMiddleware;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\CartController;
 
 Route::get('/', [homeController::class, 'showhome'])->name('homepage');
 Route::get('/product', [homeController::class, 'showProducts'])->name('products');
@@ -18,8 +19,8 @@ Route::get('/', [homeController::class, 'index'])->name('homepage');
 
 Route::middleware(['auth', AdminMiddleware::class])->group(function(){
     //admin profile
-    Route::get('/adminprofile', [ProfileController::class, 'showProfileAdmin'])->name('adminprofile');
-    Route::put('/adminprofile/{id}', [ProfileController::class, 'updateProfile'])->name('updateprofile');
+    Route::get('/adminprofile', [AdminProfileController::class, 'showProfileAdmin'])->name('adminprofile');
+    Route::put('/adminprofile/{id}', [AdminProfileController::class, 'updateProfile'])->name('updateprofile');
     //users
     Route::get('/users', [UserController::class, 'showUsers'])->name('users');
     Route::get('/users/delete/{id}', [UserController::class, 'deleteUser'])->name('userdelete'); 
@@ -56,4 +57,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [UserProfileController::class, 'showUser'])->name('user.profile');
     Route::put('/profile', [UserProfileController::class, 'updateUser'])->name('user.update');
 });
+
+//Pour le panier
+Route::get('/cart',[CartController::class, 'showCart'])->name('cart');
+
+Route::get('/product/{id}', [ProductController::class, 'showProductDetails'])->name('product.showDetails');
+
+Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
+
+Route::post('/cart/update', [CartController::class, 'updateQuantity'])->name('cart.updateQuantity');
+
+Route::delete('/cart/{cartItemId}', [CartController::class, 'destroy'])->name('cart.destroy');
+
 
