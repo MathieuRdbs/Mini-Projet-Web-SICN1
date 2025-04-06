@@ -388,8 +388,7 @@ document.getElementById('resetFilters').addEventListener('click', function() {
         checkbox.checked = false;
     });
 
-    // Reset product visibility
-    filterProducts([], null); // Show all products if no filters are applied
+ 
     
     // Clear search query from URL without page reload
     const url = new URL(window.location.href);
@@ -397,6 +396,8 @@ document.getElementById('resetFilters').addEventListener('click', function() {
         url.searchParams.delete('query');
         window.history.pushState({}, '', url);
     }
+       // Reset product visibility
+       filterProducts([], null); // Show all products if no filters are applied
     
     // Clear search input if it exists
     const searchInput = document.querySelector('input[type="search"]');

@@ -16,9 +16,13 @@
                 <!-- <span class="ms-1"><i class="bi bi-chevron-down"></i></span> -->
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-                      @foreach($categories as $categorie)
-                      <li><a class="dropdown-item" href="#">{{$categorie->category_name}}</a></li>
-                      @endforeach
+                @foreach($categories as $categorie)
+              <li>
+              <a class="dropdown-item" href="{{ route('buy', ['category' => $categorie->category_name]) }}">
+                {{ $categorie->category_name }}
+              </a>
+              </li>
+              @endforeach
 
                         <!-- <li><a class="dropdown-item" href="#">Category 1</a></li>
                         <li><a class="dropdown-item" href="#">Category 2</a></li>

@@ -104,12 +104,14 @@ class ProductController extends Controller{
                     case 'price4': $query->where('price', '>', 1000); break;
                 }
             })
+            ->orderBy('created_at', 'desc') // 👈 Sorting by newest
             ->paginate(12);
     
         return view('shop.buy', [
             'products' => $products,
             'categories' => Category::all(),
-            'cartItemCount' => Cart::count() // If using cart
+            'cartItemCount' => Cart::count()
         ]);
     }
+    
 }

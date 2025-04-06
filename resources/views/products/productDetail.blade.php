@@ -16,7 +16,7 @@
 @include('home.navbar_conn')
 
 <div class="container py-5 d-flex justify-content-center" >
-    <h1 class="text-center mb-5" style="font-weight: 700; font-size: 2.5rem; color: #333; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">
+    <h1 class="text-center mb-5" style="margin-right:30px; font-weight: 700; font-size: 2.5rem; color: #333; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">
         🛍️ Your Product
     </h1>
 
@@ -32,11 +32,11 @@
             <form action="{{route('cart.add')}}" method="POST">
             @csrf
             <input type="hidden" name="product_id" value="{{ $product->id }}">
-            <button type="submit" class="btn btn-warning">Ajouter au panier</button>
+            <button type="submit" class="btn btn-warning">Add to Cart</button>
             </form>
 
 
-            <a href="{{ route('homepage') }}" class="btn btn-outline-secondary w-100">← Retour à l'accueil</a>
+            <a href="{{ route('homepage') }}" class="btn btn-outline-secondary w-100">← Back to Home</a>
         </div>
     </div>
 </div>
