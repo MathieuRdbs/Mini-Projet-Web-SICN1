@@ -74,4 +74,42 @@ class ProductController extends Controller{
     $cartItemCount = $cartItems->count();
     return view('products.productDetail', compact('product','categories','cartItemCount'));
     }
+    public function buy()
+    {
+        $searchQuery = request('query');
+        $categoryFilter = request('category');
+        $priceFilter = request('price');
+    
+        $products = Product::with('category')
+            ->when($searchQuery, function($query) use ($searchQuery) {
+                $query->where(function($q) use ($searchQuery) {
+                    $q->where('name', 'like', '%'.$searchQuery.'%')
+                      ->orWhere('description', 'like', '%'.$searchQuery.'%')
+                      ->orWhere('price', 'like', '%'.$searchQuery.'%')
+                      ->orWhereHas('category', function($catQuery) use ($searchQuery) {
+                          $catQuery->where('name', 'like', '%'.$searchQuery.'%');
+                      });
+                });
+            })
+            ->when($categoryFilter, function($query) use ($categoryFilter) {
+                $query->whereHas('category', function($catQuery) use ($categoryFilter) {
+                    $catQuery->where('name', $categoryFilter);
+                });
+            })
+            ->when($priceFilter, function($query) use ($priceFilter) {
+                switch($priceFilter) {
+                    case 'price1': $query->where('price', '<', 100); break;
+                    case 'price2': $query->whereBetween('price', [100, 400]); break;
+                    case 'price3': $query->whereBetween('price', [400, 1000]); break;
+                    case 'price4': $query->where('price', '>', 1000); break;
+                }
+            })
+            ->paginate(12);
+    
+        return view('shop.buy', [
+            'products' => $products,
+            'categories' => Category::all(),
+            'cartItemCount' => Cart::count() // If using cart
+        ]);
+    }
 }
