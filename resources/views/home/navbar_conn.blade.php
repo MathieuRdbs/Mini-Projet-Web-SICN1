@@ -28,10 +28,10 @@
             <li><a href="#" class="nav-link px-2 text-white mx-3">Contact</a></li>
             @auth
             <li class="nav-item mx-2">
-              <a class="nav-link position-relative px-2 text-white" href="#">
+              <a class="nav-link position-relative px-2 text-white" href="{{route('cart')}}">
               <i class="bi bi-cart" style="font-size: 1.5rem;"></i>
               <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                3 <!-- Ce chiffre sera dynamique plus tard -->
+                {{$cartItemCount}}<!-- Ce chiffre sera dynamique plus tard -->
               </span>
             </a>
             </li>
