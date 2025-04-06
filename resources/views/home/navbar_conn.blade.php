@@ -39,8 +39,8 @@
             </ul>
 
             
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-              <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search" >
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" method="GET" action="{{ route('buy') }}">
+          <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search" name="query" value="{{ request('query') }}">
             </form>
             @auth
             <div class="dropdown text-end">

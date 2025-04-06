@@ -70,3 +70,4 @@ Route::post('/cart/update', [CartController::class, 'updateQuantity'])->name('ca
 Route::delete('/cart/{cartItemId}', [CartController::class, 'destroy'])->name('cart.destroy');
 
 
+Route::get('/buy', [ProductController::class, 'Buy'])->name('buy');
