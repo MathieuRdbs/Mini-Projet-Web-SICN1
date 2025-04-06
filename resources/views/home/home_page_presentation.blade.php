@@ -75,7 +75,7 @@
                                     <h4 class="card-title">{{ $product->name }}</h4>
                                     <p class="card-text">{{ Str::limit($product->description, 80) }}</p>
                                     @auth
-                                    <a href="{{ route('product.showDetails', $product->id) }}" class="btn btn-warning">Voir plus</a>
+                                    <a href="{{ route('product.showDetails', $product->id) }}" class="btn btn-warning">See More</a>
                                     @else
                                     <a href="{{ route('login') }}" class="btn btn-warning">See More</a>
                                     @endauth
