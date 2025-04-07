@@ -7,6 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <style>
@@ -297,7 +299,7 @@
                     </p>
                     <div class="mt-auto d-flex justify-content-between align-items-center">
                         <span class="price">{{ $product->price }}DHS</span>
-                        <button class="btn btn-sm btn-primary btn-add-to-cart" >Add to Cart</button>
+                        <button class="btn btn-sm btn-primary btn-add-to-cart" data-json="{{json_encode($product)}}">Add to Cart</button>
                     </div>
                 </div>
                 <!-- Tooltip Description (Full Description) -->
@@ -314,31 +316,53 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "timeOut": "5000",
+        };
+    </script>
+    @if ($errors->any())
+        <script>
+            @foreach ($errors->all() as $error)
+                toastr.error("{{ $error }}");
+            @endforeach
+        </script>
+    @endif
+
+    @if (session('success'))
+        <script>
+            toastr.success("{{ session('success') }}");
+        </script>
+    @endif
+    <script src="{{asset('js/addtocart.js')}}"></script>
     <script>
 document.getElementById('btn_filter').addEventListener('click', function() {
-    // Get selected categories
+
     let selectedCategories = [];
     document.querySelectorAll('.form-check-input[type="checkbox"]:checked').forEach(checkbox => {
-        selectedCategories.push(checkbox.id.toLowerCase()); // Convert category name to lowercase
+        selectedCategories.push(checkbox.id.toLowerCase()); 
     });
 
-    // Get selected price range
     let selectedPriceRange = getSelectedPriceRange();
 
-    // Apply filter based on selected categories and price range
+
     filterProducts(selectedCategories, selectedPriceRange);
 });
 
-// Function to get selected price range
+
 function getSelectedPriceRange() {
     let priceRange = null;
     document.querySelectorAll('.form-check-input[name="price"]:checked').forEach(input => {
-        priceRange = input.id; // Get selected price range ID
+        priceRange = input.id;
     });
     return priceRange;
 }
 
-// Filter function to show/hide products based on selected categories and price range
+
 function filterProducts(categories, priceRange) {
     const searchQuery = new URLSearchParams(window.location.search).get('query')?.toLowerCase() || '';
     const categorieQuery = new URLSearchParams(window.location.search).get('category')?.toLowerCase() || '';
@@ -351,14 +375,13 @@ function filterProducts(categories, priceRange) {
         const productName = product.querySelector('.card-title').textContent.toLowerCase();
         const productDesc = product.querySelector('.card-text').textContent.toLowerCase();
 
-        // MODIFIED SEARCH LOGIC (PRICE-ONLY FIRST)
         const searchMatch = !searchQuery || 
-            priceText.includes(searchQuery) ||  // Check price digits FIRST
+            priceText.includes(searchQuery) ||  
             productName.includes(searchQuery) || 
             productCategory.includes(searchQuery) || 
             productDesc.includes(searchQuery) ||
             !categorieQuery || 
-            priceText.includes(categorieQuery) ||  // Check price digits FIRST
+            priceText.includes(categorieQuery) ||  
             productName.includes(categorieQuery) || 
             productCategory.includes(categorieQuery) || 
             productDesc.includes(categorieQuery);

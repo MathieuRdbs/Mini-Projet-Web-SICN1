@@ -33,12 +33,12 @@
             @auth
             <li class="nav-item mx-2">
               <a class="nav-link position-relative px-2 text-white" href="{{route('cart')}}">
-              <i class="bi bi-cart" style="font-size: 1.5rem;"></i>
-              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                {{$cartItemCount}}<!-- Ce chiffre sera dynamique plus tard -->
-              </span>
-            </a>
-            </li>
+                  <i class="bi bi-cart" style="font-size: 1.5rem;"></i>
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cartCount">
+                      0
+                  </span>
+              </a>
+          </li>
             @endauth
             </ul>
 

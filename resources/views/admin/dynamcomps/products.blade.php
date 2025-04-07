@@ -34,7 +34,7 @@
                                 @endif
                             </td>
                             <td scope="row" class="text-center">{{ $product->name }}</td>
-                            <td scope="row" class="text-center">{{ Str::limit($product->description, 50, '...') }}</td>
+                            <td scope="row" class="text-center">{{ Str::limit($product->description, 30, '...') }}</td>
                             <td scope="row" class="text-center">{{ $product->category->category_name}}</td>
                             <td scope="row" class="text-center">{{ $product->price }}</td>
                             <td scope="row" class="text-center">{{ $product->quantity }}</td>
@@ -74,7 +74,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalTitle">Add New Product</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="cancelBtn"></button>
                 </div>
                 <form id="productForm" method="POST" enctype="multipart/form-data">
                     @csrf                   

@@ -30,7 +30,7 @@ class ProductController extends Controller{
         }
     
         Product::create($validated);
-        return redirect()->route('products')->with('success', 'Product added!');
+        return redirect()->route('productsAdmin')->with('success', 'Product added!');
     }
 
     public function updateProduct(Request $request, $id){

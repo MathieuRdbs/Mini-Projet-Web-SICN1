@@ -9,7 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 
@@ -29,11 +30,9 @@
             <p class="mb-3">{{ $product->description }}</p>
             <p class="mb-4"><strong>Prix :</strong> {{ number_format($product->price, 2) }} DHS</p>
             
-            <form action="{{route('cart.add')}}" method="POST">
-            @csrf
             <input type="hidden" name="product_id" value="{{ $product->id }}">
-            <button type="submit" class="btn btn-warning">Add to Cart</button>
-            </form>
+            <button type="submit" class="btn btn-warning mb-4 btn-add-to-cart" data-json="{{json_encode($product)}}">Add to Cart</button>
+            
 
 
             <a href="{{ route('homepage') }}" class="btn btn-outline-secondary w-100">← Back to Home</a>
@@ -43,6 +42,29 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "timeOut": "5000",
+        };
+    </script>
+    @if ($errors->any())
+        <script>
+            @foreach ($errors->all() as $error)
+                toastr.error("{{ $error }}");
+            @endforeach
+        </script>
+    @endif
+
+    @if (session('success'))
+        <script>
+            toastr.success("{{ session('success') }}");
+        </script>
+    @endif
+    <script src="{{asset('js/addtocart.js')}}"></script>
 <script>
 // Script pour le navbar fixed
 document.addEventListener("DOMContentLoaded", function() {
