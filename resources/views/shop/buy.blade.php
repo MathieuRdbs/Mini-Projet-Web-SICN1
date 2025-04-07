@@ -187,12 +187,15 @@
         <div class="filter-section">
             <h5>Category Type</h5>
             <div class="filter-option">
+                @foreach ($categories as $category)
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="Archery" >
-                    <label class="form-check-label" for="Archery">Archery</label>
+                    <input class="form-check-input" type="checkbox" id="{{$category->category_name}}" >
+                    <label class="form-check-label" for="{{$category->category_name}}">{{$category->category_name}}</label>
                 </div>
+                @endforeach
+                
             </div>
-            <div class="filter-option">
+            {{-- <div class="filter-option">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="Martial Arts" >
                     <label class="form-check-label" for="Martial Arts">Martial Arts</label>
@@ -233,7 +236,7 @@
                     <input class="form-check-input" type="checkbox" id="Volleyball" >
                     <label class="form-check-label" for="Volleyball">Vollyball</label>
                 </div>
-            </div>
+            </div> --}}
             <!-- Add other categories here -->
         </div>
         
@@ -338,6 +341,7 @@ function getSelectedPriceRange() {
 // Filter function to show/hide products based on selected categories and price range
 function filterProducts(categories, priceRange) {
     const searchQuery = new URLSearchParams(window.location.search).get('query')?.toLowerCase() || '';
+    const categorieQuery = new URLSearchParams(window.location.search).get('category')?.toLowerCase() || '';
     const products = document.querySelectorAll('.product-card');
     
     products.forEach(product => {
@@ -352,7 +356,12 @@ function filterProducts(categories, priceRange) {
             priceText.includes(searchQuery) ||  // Check price digits FIRST
             productName.includes(searchQuery) || 
             productCategory.includes(searchQuery) || 
-            productDesc.includes(searchQuery);
+            productDesc.includes(searchQuery) ||
+            !categorieQuery || 
+            priceText.includes(categorieQuery) ||  // Check price digits FIRST
+            productName.includes(categorieQuery) || 
+            productCategory.includes(categorieQuery) || 
+            productDesc.includes(categorieQuery);
 
         // Keep existing category/price range checks
         const categoryMatch = categories.length === 0 || categories.includes(productCategory);
@@ -396,6 +405,10 @@ document.getElementById('resetFilters').addEventListener('click', function() {
         url.searchParams.delete('query');
         window.history.pushState({}, '', url);
     }
+    if (url.searchParams.has('category')) {
+        url.searchParams.delete('category');
+        window.history.pushState({}, '', url);
+    }
        // Reset product visibility
        filterProducts([], null); // Show all products if no filters are applied
     
@@ -404,6 +417,7 @@ document.getElementById('resetFilters').addEventListener('click', function() {
     if (searchInput) {
         searchInput.value = '';
     }
+    window.location.href = window.location.pathname;
 });
 const cards = document.querySelectorAll('.card');
 cards.forEach(card => {
