@@ -93,7 +93,7 @@ class ProductController extends Controller{
             })
             ->when($categoryFilter, function($query) use ($categoryFilter) {
                 $query->whereHas('category', function($catQuery) use ($categoryFilter) {
-                    $catQuery->where('name', $categoryFilter);
+                    $catQuery->where('category_name', $categoryFilter);
                 });
             })
             ->when($priceFilter, function($query) use ($priceFilter) {
