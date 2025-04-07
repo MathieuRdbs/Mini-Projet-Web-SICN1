@@ -349,7 +349,6 @@ document.getElementById('btn_filter').addEventListener('click', function() {
 
     let selectedPriceRange = getSelectedPriceRange();
 
-
     filterProducts(selectedCategories, selectedPriceRange);
 });
 
@@ -401,9 +400,9 @@ function isPriceInRange(price, priceRange) {
         case 'price1': 
             return price < 100;
         case 'price2': 
-            return price >= 100 && price <= 500;
+            return price >= 100 && price <= 400;
         case 'price3': 
-            return price >= 500 && price <= 1000;
+            return price >= 400 && price <= 1000;
         case 'price4':
             return price > 1000;
         default:
