@@ -11,7 +11,7 @@
                 <div class="carousel-caption text-start">
                 <h1>WELCOME TO SPORTERO</h1>
                 <p>A place where you can find your favorite sport articles.</p>
-                <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+                <p><a class="btn btn-lg btn-primary" href="/contact_us">Learn more</a></p>
             </div>
         </div>
     </div>
@@ -31,7 +31,7 @@
           <div class="carousel-caption text-end">
             <h1>200% SATISFACTION </h1>
             <p>Our team is always ready to accompagny you before and after your purchasing. Feel free to contact us !</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Contact us</a></p>
+            <p><a class="btn btn-lg btn-primary" href="{{route('contact_us')}}">Contact us</a></p>
           </div>
         </div>
       </div>

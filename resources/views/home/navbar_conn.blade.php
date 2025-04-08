@@ -29,7 +29,7 @@
                         <li><a class="dropdown-item" href="#">Category 3</a></li> -->
                 </ul>
             </li>
-            <li><a href="#" class="nav-link px-2 text-white mx-3">Contact</a></li>
+            <li><a href="{{route('contact_us')}}" class="nav-link px-2 text-white mx-3">Contact</a></li>
             @auth
             <li class="nav-item mx-2">
               <a class="nav-link position-relative px-2 text-white" href="{{route('cart')}}">
