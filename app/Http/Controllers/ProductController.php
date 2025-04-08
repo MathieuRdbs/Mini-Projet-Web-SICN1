@@ -80,7 +80,7 @@ class ProductController extends Controller{
         $categoryFilter = request('category');
         $priceFilter = request('price');
     
-        $products = Product::with('category')
+        $products = Product::where('quantity', '>', 0)->with('category')
             ->when($searchQuery, function($query) use ($searchQuery) {
                 $query->where(function($q) use ($searchQuery) {
                     $q->where('name', 'like', '%'.$searchQuery.'%')

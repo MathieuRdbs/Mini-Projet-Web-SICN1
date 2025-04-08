@@ -25,7 +25,7 @@ class homeController extends Controller{
     {
         $user = Auth::user();
         // Récupérer les 3 premiers produits (ou tous les produits que tu souhaites)
-        $products = Product::limit(6)->get();
+        $products = Product::where('quantity', '>', 0)->limit(6)->get();
 
         //Retourne toutes les catégories
         $categories = Category::all();
