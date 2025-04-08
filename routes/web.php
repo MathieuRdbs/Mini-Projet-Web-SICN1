@@ -11,6 +11,7 @@ use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ContactController;
 
 
 Route::get('/', [homeController::class, 'index'])->name('homepage');
@@ -65,3 +66,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/orders/cancel/{id}', [OrderController::class, 'cancelOrder'])->name('ordercanceluser');
 });
 
+
+Route::get('/contact_us',[ContactController::class,'index'])->name('contact_us');
