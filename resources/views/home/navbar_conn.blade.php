@@ -53,6 +53,7 @@
               </a>
               <ul class="dropdown-menu text-small " data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(0px, 34.2857px, 0px);">
                 <li><a class="dropdown-item" href="{{route('user.profile')}}">Profile</a></li>
+                <li><a class="dropdown-item" href="{{route('orderUser')}}">Orders</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <form action="{{route('logout')}}" method="post">
                   @csrf

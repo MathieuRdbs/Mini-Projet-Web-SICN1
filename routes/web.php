@@ -61,5 +61,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cartcash', [CartController::class, 'cashpayement'])->name('cash');
     Route::get('/payment/card', [CartController::class, 'showCardPaymentPage'])->name('custom.payment.page');
     Route::post('/payment/process-card', [CartController::class, 'processCardPayment'])->name('process.card.payment');
+    Route::get('/ordersUser', [OrderController::class, 'showOrderUser'])->name('orderUser');
+    Route::get('/orders/cancel/{id}', [OrderController::class, 'cancelOrder'])->name('ordercanceluser');
 });
 

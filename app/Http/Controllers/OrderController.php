@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Product;
-
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -12,6 +12,13 @@ class OrderController extends Controller
     {
         $orders = Order::with(['user', 'carts.product'])->paginate(5);
         return view('admin.dynamcomps.orders', compact('orders'));
+    }
+
+    public function showOrderUser()
+    {
+        $user = Auth::user();
+        $orders = Order::with(['user', 'carts.product'])->where('user_id', $user->id)->paginate(5);
+        return view('user.ordersuser', compact('orders'));
     }
 
     public function shipOrder($id)
