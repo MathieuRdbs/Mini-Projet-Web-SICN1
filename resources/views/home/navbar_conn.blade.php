@@ -57,7 +57,7 @@
                 <li><hr class="dropdown-divider"></li>
                 <form action="{{route('logout')}}" method="post">
                   @csrf
-                  <li><button class="dropdown-item" type="submit">logout</button></li>
+                  <li><button class="dropdown-item" type="submit" id="logout">logout</button></li>
                 </form>
               </ul>
             </div> 
@@ -73,3 +73,14 @@
           </div>
         </div>
       </header>
+
+      <script>
+         document.addEventListener("DOMContentLoaded", function() {
+          const btn_logout = document.getElementById('logout');
+          if (btn_logout) {
+            btn_logout.addEventListener('click', function () {
+              localStorage.clear();
+            });
+          }
+         });
+      </script>

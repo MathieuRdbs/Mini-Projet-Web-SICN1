@@ -15,7 +15,7 @@
                         <form action="{{route('logout')}}" method="post">
                             @csrf
                             <div>
-                                <button type="submit"  class="dropdown-item">logout</button>
+                                <button type="submit"  class="dropdown-item" id="logout">logout</button>
                             </div>
                         </form>
                     </li>
@@ -25,3 +25,13 @@
         
     </div>
 </nav>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+     const btn_logout = document.getElementById('logout');
+     if (btn_logout) {
+       btn_logout.addEventListener('click', function () {
+         localStorage.clear();
+       });
+     }
+    });
+ </script>
