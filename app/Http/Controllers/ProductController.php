@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Str; 
 use App\Models\Cart;
 
 class ProductController extends Controller{
@@ -81,16 +81,24 @@ class ProductController extends Controller{
         $priceFilter = request('price');
     
         $products = Product::where('quantity', '>', 0)->with('category')
-            ->when($searchQuery, function($query) use ($searchQuery) {
-                $query->where(function($q) use ($searchQuery) {
-                    $q->where('name', 'like', '%'.$searchQuery.'%')
-                      ->orWhere('description', 'like', '%'.$searchQuery.'%')
-                      ->orWhere('price', 'like', '%'.$searchQuery.'%')
-                      ->orWhereHas('category', function($catQuery) use ($searchQuery) {
-                          $catQuery->where('category_name', 'like', '%'.$searchQuery.'%');
-                      });
-                });
-            })
+        ->when($searchQuery, function($query) use ($searchQuery) {
+            $searchWords = explode(' ', $searchQuery);
+    
+            $query->where(function($q) use ($searchWords) {
+                foreach ($searchWords as $word) {
+                    $lowerWord = Str::lower($word);
+    
+                    $q->orWhere(function($subQ) use ($lowerWord) {
+                        $subQ->whereRaw('LOWER(name) LIKE ?', ["%$lowerWord%"])
+                             ->orWhereRaw('LOWER(description) LIKE ?', ["%$lowerWord%"])
+                             ->orWhereRaw('LOWER(price) LIKE ?', ["%$lowerWord%"])
+                             ->orWhereHas('category', function($catQuery) use ($lowerWord) {
+                                 $catQuery->whereRaw('LOWER(category_name) LIKE ?', ["%$lowerWord%"]);
+                             });
+                    });
+                }
+            });
+        })
             ->when($categoryFilter, function($query) use ($categoryFilter) {
                 $query->whereHas('category', function($catQuery) use ($categoryFilter) {
                     $catQuery->where('category_name', $categoryFilter);
@@ -104,8 +112,9 @@ class ProductController extends Controller{
                     case 'price4': $query->where('price', '>', 1000); break;
                 }
             })
-            ->orderBy('created_at', 'desc') // 👈 Sorting by newest
+            ->orderBy('created_at', 'desc') //  Sorting by newest
             ->paginate(12);
+ 
     
         return view('shop.buy', [
             'products' => $products,
