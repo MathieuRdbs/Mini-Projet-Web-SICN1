@@ -87,7 +87,7 @@ class ProductController extends Controller{
                       ->orWhere('description', 'like', '%'.$searchQuery.'%')
                       ->orWhere('price', 'like', '%'.$searchQuery.'%')
                       ->orWhereHas('category', function($catQuery) use ($searchQuery) {
-                          $catQuery->where('name', 'like', '%'.$searchQuery.'%');
+                          $catQuery->where('category_name', 'like', '%'.$searchQuery.'%');
                       });
                 });
             })
